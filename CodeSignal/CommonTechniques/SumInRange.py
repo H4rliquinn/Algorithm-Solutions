@@ -10,4 +10,16 @@ def sumInRange(nums, queries):
     #         sum+=nums[x]
     #     total+=sum
     # return total%1000000007
-    pass
+
+    #Still Slow
+    # values={}
+    # total=0
+    # for query in queries:
+    #     for x in range(query[0],query[1]+1):
+    #         if values.get(x,None):
+    #             values[x]+=1
+    #         else:
+    #             values[x]=1
+    # for key in values.keys():
+    #     total+=nums[key]*values[key]
+    # return total%1000000007
