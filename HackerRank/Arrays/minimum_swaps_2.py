@@ -10,9 +10,13 @@ import sys
 def minimumSwaps(arr):
     swaps=0
     for x in range(len(arr)):
-        if arr[x]!=x+1:
-            loc=arr.index(x+1)
-            arr[x],arr[loc]=arr[loc],arr[x]
+        #Too Slow
+        # if arr[x]!=x+1:
+        #     loc=arr.index(x+1)
+        #     arr[x],arr[loc]=arr[loc],arr[x]
+        #     swaps+=1
+        while arr[x]!=x+1:
+            arr[arr[x]-1],arr[x]=arr[x],arr[arr[x]-1]
             swaps+=1
     print(swaps)
     return swaps
