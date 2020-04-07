@@ -4,25 +4,33 @@ def nQueens(n):
     
     if n==1:
         return [[1]]
-    elif n==2:
-        return [[]]
-    elif n==3:
-        return [[]]
+    elif n in [2,3]:
+        return []
 
-    def checkQueen(x,curr,col):
-        if x not in curr:
-            for y in range(col-2,-1,-1):
-                if curr[y]!=x+((col-1)-y) and curr[y]!=x-((col-1)-y):
-                    return True
-        return False
+    def checkQueen(x,col,curr):
+        # print("STOP",x,col,curr)
+        if col==1:
+            return True
+        if x in curr:
+            return False
+
+        for y in range(col-2,-1,-1):
+            # print("Diag",curr,col,y,x,((col-1)-y))
+            print (curr[y],curr[y]==x+((col-1)-y),curr[y]==x-((col-1)-y))
+            if curr[y]==x+((col-1)-y) or curr[y]==x-((col-1)-y):
+                return False
+
+        print("End")
+        return True
 
     def findQueens(res,curr,col=1):
         for x in range(1,n+1):
-            if checkQueen():
-                curr[col]=x
-                if col==n:
-                    res.append(curr)
+            if checkQueen(x,col,curr):
+                curr[col-1]=x
+                if col==n and checkQueen(x,col,curr):
+                        res.append(list(curr))
                 else:
-                    findQueens(res,curr,col=col+1)
-
+                    new_curr=list(curr)
+                    findQueens(res,new_curr,col=col+1)
+    findQueens(res,curr)
     return res
