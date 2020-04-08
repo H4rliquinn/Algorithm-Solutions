@@ -13,18 +13,12 @@ def addTwoHugeNumbers(a, b):
 
     while curr_a is not None:
         val=str(curr_a.value)
-        if len(val)<4:
-            str_a+=f'{0*(4-len(val))}{val}'
-        else:
-            str_a+=val
+        str_a+=f'{"0"*(4-len(val))}{val}'
         curr_a=curr_a.next
 
     while curr_b is not None:
         val=str(curr_b.value)
-        if len(val)<4:
-            str_b+=f'{0*(4-len(val))}{val}'
-        else:
-            str_b+=val
+        str_b+=f'{"0"*(4-len(val))}{val}'
         curr_b=curr_b.next
 
     print(int(str_a),int(str_b))
