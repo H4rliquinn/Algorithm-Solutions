@@ -3,21 +3,40 @@
  * @return {number}
  */
 
-//My Version
-
+//Using Splice to try to make it sorting faster than re-sorting the whole array
 var lastStoneWeight = function(stones) { 
     let sortedArray = stones.sort((a, b) => a-b)
     while(sortedArray.length > 1) {
         if(sortedArray[sortedArray.length-1] === sortedArray[sortedArray.length-2]) {
             sortedArray=sortedArray.slice(0,sortedArray.length-2)
         } else {
-            sortedArray.push(sortedArray.pop()- sortedArray.pop())
-            sortedArray.sort((a, b) => a-b)
+            let val=sortedArray.pop() - sortedArray.pop()
+            for (let x=0;x<sortedArray.length-1;x++){
+                if (sortedArray[x]>val){
+                    sortedArray.splice(x,0,val)
+                    break;
+                }
+            }
         }
     }
     if(sortedArray.length === 0) return 0;
     return sortedArray[0];  
 };
+
+//My Version
+// var lastStoneWeight = function(stones) { 
+//     let sortedArray = stones.sort((a, b) => a-b)
+//     while(sortedArray.length > 1) {
+//         if(sortedArray[sortedArray.length-1] === sortedArray[sortedArray.length-2]) {
+//             sortedArray=sortedArray.slice(0,sortedArray.length-2)
+//         } else {
+//             sortedArray.push(sortedArray.pop()- sortedArray.pop())
+//             sortedArray.sort((a, b) => a-b)
+//         }
+//     }
+//     if(sortedArray.length === 0) return 0;
+//     return sortedArray[0];  
+// };
 
 
 // Class version
