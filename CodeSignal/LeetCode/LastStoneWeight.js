@@ -4,6 +4,7 @@
  */
 
 //Using Splice to try to make it sorting faster than re-sorting the whole array
+//Faster than 91.5% of other solutions
 var lastStoneWeight = function(stones) { 
     let sortedArray = stones.sort((a, b) => a-b)
     while(sortedArray.length > 1) {
@@ -11,17 +12,17 @@ var lastStoneWeight = function(stones) {
             sortedArray=sortedArray.slice(0,sortedArray.length-2)
         } else {
             let val=sortedArray.pop() - sortedArray.pop()
-            for (let x=0;x<sortedArray.length-1;x++){
-                if (sortedArray[x]>val){
-                    sortedArray.splice(x,0,val)
-                    break;
-                }
+            let i=0;
+            while (sortedArray[i]<val){
+                i++;    
             }
+            sortedArray.splice(i,0,val);
         }
     }
     if(sortedArray.length === 0) return 0;
     return sortedArray[0];  
 };
+
 
 //My Version
 // var lastStoneWeight = function(stones) { 
