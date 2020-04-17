@@ -12,28 +12,33 @@ You may not alter the values in the nodes - only the nodes themselves can be cha
 #     self.next = None
 #
 def reverseNodesInKGroups(l, k):
+    dummy_head=ListNode(0)
+    dummy_head.next=l
+
+    end_last=dummy_head
     curr_pos=l
-    curr_group_start=l
-    end_last=None
+    group_start=l
+    tail=None
 
     # Loop through LL
     while curr_pos != None:
-        # check if enough elements for group
+        # Check if enough elements for group
         check_pos=curr_pos
-        for i in range(k):
+        for i in range(k-1):
             if check_pos==None:
                 break
             check_pos=check_pos.next
         if check_pos==None:
             break
+
         # Reverse Elements up to k
-        group_start=curr_pos
         for i in range(k-1):
-            temp=curr_pos
             curr_pos=group_start.next
             group_start.next=curr_pos.next
-            curr_pos.next=temp
-        for i in range(k):
-            curr_pos=curr_pos.next
+            curr_pos.next=end_last.next
+            end_last.next=curr_pos
+        end_last=group_start
+        group_start=group_start.next
+        curr_pos=group_start
     # Return original l
-    return l
+    return dummy_head.next
