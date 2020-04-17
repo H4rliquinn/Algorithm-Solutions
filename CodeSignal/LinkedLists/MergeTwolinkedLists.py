@@ -26,7 +26,6 @@ def mergeTwoLinkedLists(l1, l2):
         curr2=curr2.next
 
     # Loop until one list runs out
-    # Test if there are elements left on both sides
     curr_new=new_list
     while curr1!=None and curr2!=None:
         # Compare and add the lowest
@@ -38,12 +37,11 @@ def mergeTwoLinkedLists(l1, l2):
             curr_new.next=curr2
             curr2=curr2.next
             curr_new=curr_new.next
-
     # Add the rest if not
     if curr1==None:
-        curr_new.next=l2
+        curr_new.next=curr2
     elif curr2==None:
-        curr_new.next=l1
+        curr_new.next=curr1
 
     #Return completed list
     return new_list
