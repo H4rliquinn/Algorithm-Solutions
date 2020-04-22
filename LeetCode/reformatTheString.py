@@ -1,11 +1,3 @@
-"""
-Share
-Given alphanumeric string s. (Alphanumeric string is a string consisting of lowercase English letters and digits).
-
-You have to find a permutation of the string where no letter is followed by another letter and no digit is followed by another digit. That is, no two adjacent characters have the same type.
-
-Return the reformatted string or return an empty string if it is impossible to reformat the string.
-"""
 class Solution:
     def reformat(self, s: str) -> str:
         # Edge Case
@@ -20,9 +12,12 @@ class Solution:
         else:
             front_type="l"
         last_type=None
-        
+        curr_type=None
         #Iterate through string
-        for x in range(len(news)):
+        x=0
+        while x<len(news):
+        # for x in range(len(news)):
+            # print(news,curr_type,last_type,x)
             if news[x].isdigit():
                 curr_type="d"
             else:
@@ -38,5 +33,16 @@ class Solution:
                 # Else push to end
                 else:
                     news.append(news.pop(x))
-        # Return joined String
+                # print(news,curr_type,last_type,x)
+            else:
+                x=x+1
+                last_type=curr_type
+        # Return joined String if successfull
+        
+        # print(news)
+        if news[-1].isdigit()==news[-2].isdigit():
+            return ""
+        if news[-1].isalpha()==news[-2].isalpha():
+            return ""
+            
         return "".join(news)
