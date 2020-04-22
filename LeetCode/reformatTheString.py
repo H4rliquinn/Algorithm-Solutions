@@ -6,48 +6,30 @@ class Solution:
         # Prep string 
         news=list(s)
         
-        # Set first char type
-        if news[0].isdigit():
-            front_type="d"
-        else:
-            front_type="l"
-        last_type=None
-        curr_type=None
-        #Iterate through string
-        x=0
-        y=0
-        while x<len(news):
-        # for x in range(len(news)):
-            print(news,curr_type,last_type,x)
+        digits=[]
+        alpha=[]
+        res=[]
+        for x in range(len(news)):
             if news[x].isdigit():
-                curr_type="d"
+                digits.append(news[x])
             else:
-                curr_type="l"
-            
-            # Check if repeat type
-            if curr_type==last_type:
-            # Move the type if repeat 
-            # If safe to push to front do that
-                if curr_type!=front_type:
-                    news.insert(0,news.pop(x))
-                    front_type=curr_type
-                # Else push to end
-                else:
-                    news.append(news.pop(x))
-                # print(news,curr_type,last_type,x)
+                alpha.append(news[x])
+        diff=abs(len(digits)-len(alpha))
+        if diff>1:
+            return ""
+        else:
+            if len(digits)>len(alpha):
+                for x in range(len(digits)-1):
+                    res.append(digits.pop())
+                    res.append(alpha.pop())
+                res.append(digits.pop())
+            elif len(digits)<len(alpha):
+                for x in range(len(alpha)-1):
+                    res.append(alpha.pop())
+                    res.append(digits.pop())
+                res.append(alpha.pop())
             else:
-                x=x+1
-                last_type=curr_type
-            y=y+1
-            # print(len(news),y)    
-            if y>len(news)*4:
-                break
-        # Return joined String if successfull
-        
-        # print(news)
-        if news[-1].isdigit()==news[-2].isdigit():
-            return ""
-        if news[-1].isalpha()==news[-2].isalpha():
-            return ""
-            
-        return "".join(news)
+                for x in range(len(digits)):
+                    res.append(alpha.pop())
+                    res.append(digits.pop())
+        return "".join(res)
