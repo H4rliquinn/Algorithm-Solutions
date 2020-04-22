@@ -15,9 +15,10 @@ class Solution:
         curr_type=None
         #Iterate through string
         x=0
+        y=0
         while x<len(news):
         # for x in range(len(news)):
-            # print(news,curr_type,last_type,x)
+            print(news,curr_type,last_type,x)
             if news[x].isdigit():
                 curr_type="d"
             else:
@@ -37,6 +38,10 @@ class Solution:
             else:
                 x=x+1
                 last_type=curr_type
+            y=y+1
+            # print(len(news),y)    
+            if y>len(news)*4:
+                break
         # Return joined String if successfull
         
         # print(news)
