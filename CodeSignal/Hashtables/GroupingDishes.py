@@ -1,6 +1,6 @@
 def groupingDishes(dishes):
     ingredients={}
-    ingredient_list=[]
+    res=[]
 
     for x in range(len(dishes)):
         curr_dish=dishes[x][0]
@@ -10,4 +10,8 @@ def groupingDishes(dishes):
             else:
                 ingredients[dishes[x][y]]=[curr_dish]
 
-    print(ingredients)
+    for x in sorted(ingredients.keys()):
+        if len(ingredients[x])>1:
+            res.append([x])
+            res[-1].extend(sorted(ingredients[x]))       
+    return res
