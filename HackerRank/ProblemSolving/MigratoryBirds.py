@@ -14,13 +14,24 @@ import sys
 
 # Complete the migratoryBirds function below.
 def migratoryBirds(arr):
+    # Init birds Dict
     birds={1:0,2:0,3:0,4:0,5:0}
+    # Tracking Vars
     max_sightings=0
-    popular_birds=[]
+    popular_birds={}
 
+    # Loop through sightings
     for x in arr:
         birds[x]+=1
-        # if birds
+        # If new max, set max and create new bird nest
+        if birds[x]>max_sightings:
+            max_sightings=birds[x]
+            popular_birds={x}
+        # If tie for max, add bird to nest
+        elif birds[x]==max_sightings:
+            popular_birds.add(x)
+    # Return the smallest bird
+    return min(popular_birds)
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
