@@ -4,17 +4,20 @@ Given an array strings, determine whether it follows the sequence given in the p
 def areFollowingPatterns(strings, patterns):
     # Create Hash to save pattern
     pattern_lookup={}
-    # Return True unless pattern fails
-    same=True
-
+    string_lookup={}
     # Loop through strings
     for x in range(len(strings)):
         # Look for pattern
         if pattern_lookup.get(patterns[x],None):
-            match=strings[x]
+            match=pattern_lookup[patterns[x]]
+        else:
             # Add pattern if not found
-
+            pattern_lookup[patterns[x]]=strings[x]
+            match=strings[x]
         # Match to pattern
-    
-    # Return result
-    return same
+        print(strings[x],match)
+        if strings[x]!=match:
+            #Break if incorrect
+            return False
+    #Return True if no disparity found
+    return True
