@@ -7,16 +7,24 @@ def areFollowingPatterns(strings, patterns):
     string_lookup={}
     # Loop through strings
     for x in range(len(strings)):
+        
         # Look for pattern
         if pattern_lookup.get(patterns[x],None):
-            match=pattern_lookup[patterns[x]]
+            pattern_match=pattern_lookup[patterns[x]]
         else:
             # Add pattern if not found
             pattern_lookup[patterns[x]]=strings[x]
-            match=strings[x]
-        # Match to pattern
-        print(strings[x],match)
-        if strings[x]!=match:
+            pattern_match=strings[x]
+
+        # Look for String
+        if string_lookup.get(strings[x],None):
+            string_match=string_lookup[strings[x]]
+        else:
+            # Add string if not found
+            string_lookup[strings[x]]=patterns[x]
+            string_match=patterns[x]  
+        # Match Strings and Patterns
+        if string_match!=patterns[x] or pattern_match!=strings[x]:
             #Break if incorrect
             return False
     #Return True if no disparity found
