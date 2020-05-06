@@ -43,7 +43,11 @@
 
 def fib(n): 
     """Returns the nth Fibonacci number"""
-    raise NotImplementedError("Fill this in")
+    if n==0:
+        return 0
+    if n==1:
+        return 1
+    return fib(n-1)+fib(n-2)
  
 
 
@@ -80,6 +84,7 @@ import time
 
 def time_fib(fib_func, n): 
     start = time.time()
+    fib_func(n)
     end = time.time()
     print(f"{n}: {end-start}")
 
