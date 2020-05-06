@@ -132,11 +132,13 @@ def fib_memo1(n):
     if n == 1: return 1
     
     # Check if the result is already in the cache and return it if present
-    raise NotImplementedError("Fill this in")
-    
+    # raise NotImplementedError("Fill this in")
+    if n in memo:
+        return memo[n]
     # If not, calculate the result and store it in the cache. 
     solution = fib_memo1(n-1) + fib_memo1(n-2)
-    raise NotImplementedError("Fill this in")    
+    memo[n]=solution
+    # raise NotImplementedError("Fill this in")    
 
     return solution
 
@@ -179,7 +181,8 @@ def fib_tab(n):
 
     # Calculate and store the rest of the values
     for i in range(2, n+1): 
-        raise NotImplementedError("Fill this in")
+        for i in range(2,n+1:
+            tab[i]=tab[i-1] +tab[i-2]
     
     return tab[n]
 
