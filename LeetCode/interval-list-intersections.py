@@ -16,17 +16,18 @@ class Solution:
             
             if HL>LH:
              return []
-            return [min(LH,HL),min(LH,HH)]
+            return [max(LL,HL),min(LH,HH)]
             # print(A,B)
         
-        rslt=[]        
-        rslt.append(calculate_interval(A[0],B[0]))
-        
-        for x in range(1,len(A)):
-            temp=calculate_interval(B[x-1],A[x])
-            if len(temp)>0:
-                rslt.append(temp)
-            temp=calculate_interval(A[x],B[x])
-            if len(temp)>0:  
-                rslt.append(temp)                
+        rslt=[]
+        if len(A)>0 and len(B)>0:
+            rslt.append(calculate_interval(A[0],B[0]))
+
+            for x in range(1,len(A)):
+                temp=calculate_interval(B[x-1],A[x])
+                if len(temp)>0:
+                    rslt.append(temp)
+                temp=calculate_interval(A[x],B[x])
+                if len(temp)>0:  
+                    rslt.append(temp)                
         return rslt
