@@ -1,4 +1,7 @@
-'''Given a binary tree, return the sum of values of its deepest leaves.'''
+'''Given a binary tree, return the sum of values of its deepest leaves.
+
+Input: root = [1,2,3,4,5,null,6,7,null,null,null,null,8]
+Output: 15'''
 
 # Definition for a binary tree node.
 # class TreeNode:
