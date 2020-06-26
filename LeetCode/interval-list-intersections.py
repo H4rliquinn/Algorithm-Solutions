@@ -14,20 +14,32 @@ class Solution:
             HL=B[0]
             HH=B[1]
             
-            if HL>LH:
+            if max(LL,HL)>min(LH,HH):
              return []
             return [max(LL,HL),min(LH,HH)]
             # print(A,B)
         
         rslt=[]
         if len(A)>0 and len(B)>0:
-            rslt.append(calculate_interval(A[0],B[0]))
-
-            for x in range(1,len(A)):
-                temp=calculate_interval(B[x-1],A[x])
+            x=0
+            y=0
+            temp=calculate_interval(A[x],B[y])
+            if len(temp)>0:
+                rslt.append(temp)
+            
+            while x<len(A)-1:
+                x+=1
+                temp=calculate_interval(A[x],B[y])
                 if len(temp)>0:
                     rslt.append(temp)
-                temp=calculate_interval(A[x],B[x])
+                if y<len(B)-1:
+                    y+=1
+                    temp=calculate_interval(A[x],B[y])
+                    if len(temp)>0:  
+                        rslt.append(temp)   
+            if y<len(B)-1:
+                y+=1
+                temp=calculate_interval(A[x],B[y])
                 if len(temp)>0:  
-                    rslt.append(temp)                
+                    rslt.append(temp)              
         return rslt
