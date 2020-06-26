@@ -13,33 +13,49 @@ class Solution:
             LH=A[1]
             HL=B[0]
             HH=B[1]
-            
-            if max(LL,HL)>min(LH,HH):
-             return []
+            print(A,B,[max(LL,HL),min(LH,HH)])
+            if (LL<HL and HL>LH) or (HL<LL and LL>HH):
+                return []
             return [max(LL,HL),min(LH,HH)]
             # print(A,B)
         
         rslt=[]
+            
         if len(A)>0 and len(B)>0:
             x=0
             y=0
             temp=calculate_interval(A[x],B[y])
             if len(temp)>0:
                 rslt.append(temp)
+            lenA=len(A)-1
+            lenB=len(B)-1
             
-            while x<len(A)-1:
-                x+=1
-                temp=calculate_interval(A[x],B[y])
-                if len(temp)>0:
-                    rslt.append(temp)
-                if y<len(B)-1:
-                    y+=1
-                    temp=calculate_interval(A[x],B[y])
-                    if len(temp)>0:  
-                        rslt.append(temp)   
-            if y<len(B)-1:
-                y+=1
+            while x<lenA or y<lenB:
+                if A[x][1]<B[y][1]:
+                    if x<lenA:
+                        x+=1
+                    else:
+                        y+=1
+                elif A[x][1]>B[y][1]:
+                    if y<lenB:
+                        y+=1
+                    else:
+                        x+=1
+                else:
+                    if A[x][0]<B[y][0]:
+                        if x<lenA:
+                            x+=1
+                        else:
+                            y+=1
+                    else:
+                        if y<lenB:
+                            y+=1
+                        else:
+                            x+=1
+                    
                 temp=calculate_interval(A[x],B[y])
                 if len(temp)>0:  
-                    rslt.append(temp)              
+                    rslt.append(temp)
+
         return rslt
+    
