@@ -25,7 +25,7 @@ class Solution:
                 curr-=1
                 lookup=curr+1
             #if higher loop through dist to find next higher value
-            if T[curr]>T[lookup]:
+            if T[curr]>=T[lookup]:
                 #add current value to sum
                 if dist[lookup]!=0:
                     print("GT",dist,days,lookup)
@@ -39,6 +39,7 @@ class Solution:
                     lookup=curr+1
             count+=1
             if count>50:
-                return [-1]
+                dist[0]=100
+                return dist
         #return distances
         return dist
