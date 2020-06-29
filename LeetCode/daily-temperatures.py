@@ -9,17 +9,13 @@ Note: The length of temperatures will be in the range [1, 30000]. Each temperatu
 class Solution:
     def dailyTemperatures(self, T: List[int]) -> List[int]:
         dist=[0]*len(T)
-
-
         curr=len(T)-2
         lookup=curr+1
         days=1
-        count=0
         #iterate backward through temp list
         while curr>-1:
             #if temp lower add 1 to dist
             if T[curr]<T[lookup]:
-                print("Lower")
                 dist[curr]=days
                 days=1
                 curr-=1
@@ -28,18 +24,12 @@ class Solution:
             if T[curr]>=T[lookup]:
                 #add current value to sum
                 if dist[lookup]!=0:
-                    print("GT",dist,days,lookup)
                     days+=dist[lookup]
                     lookup+=dist[lookup]
                 else:
-                    print("NF",curr,days)
                     dist[curr]=0
                     days=1
                     curr-=1
                     lookup=curr+1
-            count+=1
-            if count>50:
-                dist[0]=100
-                return dist
         #return distances
         return dist
