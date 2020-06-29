@@ -30,23 +30,24 @@ class Solution:
         max_sum=0
         
         def find_sum(g,a,b):
-            if b!=2 or a!=1:
-                return (22,10)
+            # if b!=4 or a!=2:
+            #     return (1,1)
             q=queue.Queue(maxsize=0)
-            v=[]
             curr_sum=0
             max_sum=0
             #Do BFS to find maximum gold possible
-            q.put((b,a,0,0))
+            q.put((b,a,0,0,[]))
             while q.empty()==False:
                 curr=q.get()
                 this_b=curr[0]
                 this_a=curr[1]
                 cells=curr[2]
                 curr_sum=curr[3]
+                v=curr[4]
                 #Add Current Value to Current Sum
                 curr_sum+=g[this_b][this_a]
-                print(curr_sum)
+                # if cells>5:
+                #     print(curr[0],curr[1],curr[2],curr_sum)
                 if curr_sum>max_sum:
                     max_sum=curr_sum
                 #Total cells=25 then max solution found
@@ -56,13 +57,17 @@ class Solution:
                 v.append((this_b,this_a))
                 #Add current NSEW to queue unless val of 0 or in Visited
                 if this_b+1<len(g) and g[this_b+1][this_a]>0 and (this_b+1,this_a) not in v:
-                    q.put((this_b+1,this_a,cells,curr_sum))
+                    new_v=v[:]
+                    q.put((this_b+1,this_a,cells+1,curr_sum,new_v))
                 if this_b-1>-1 and g[this_b-1][this_a]>0 and (this_b-1,this_a) not in v:
-                    q.put((this_b-1,this_a,cells,curr_sum))
+                    new_v=v[:]
+                    q.put((this_b-1,this_a,cells+1,curr_sum,new_v))
                 if this_a+1<len(g[this_b]) and g[this_b][this_a+1]>0 and (this_b,this_a+1) not in v:
-                    q.put((this_b,this_a+1,cells,curr_sum))
+                    new_v=v[:]
+                    q.put((this_b,this_a+1,cells+1,curr_sum,new_v))
                 if this_a-1>-1 and g[this_b][this_a-1]>0 and (this_b,this_a-1) not in v:
-                    q.put((this_b,this_a-1,cells,curr_sum))
+                    new_v=v[:]
+                    q.put((this_b,this_a-1,cells+1,curr_sum,new_v))
             return (max_sum,cells)
                 
         
