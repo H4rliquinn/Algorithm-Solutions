@@ -3,11 +3,10 @@ Given a string S, check if the letters can be rearranged so that two characters 
 
 If possible, output any possible result.  If not possible, return the empty string.
 Example 1:
-
 Input: S = "aab"
 Output: "aba"
-Example 2:
 
+Example 2:
 Input: S = "aaab"
 Output: ""
 """
@@ -19,7 +18,6 @@ class Solution:
         hold=[]
         
         def useHold(first_char,prev_char,rtn):
-            print(hold,prev_char)
             if len(hold)>0:
                 rep=hold[0]
                 if rep!=prev_char:
@@ -43,7 +41,7 @@ class Solution:
                 rtn=x+rtn
             else:
                 hold.append(x)
-        print("HOLD",hold,rtn)
+        
         while len(hold)>0:
             cur=hold.pop(0)
             pChar=""
@@ -51,12 +49,11 @@ class Solution:
             flag=False
             for c in rtn:
                 if c!=cur and pChar!=cur:
-                    print(rtn[0:index],cur,rtn[index:])
                     rtn=rtn[0:index]+cur+rtn[index:]
                     flag=True
+                    break
                 pChar=c
                 index+=1 
             if flag==False:
                 return ""
-            
-            return rtn
+        return rtn
