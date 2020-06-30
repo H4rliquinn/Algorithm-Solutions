@@ -14,7 +14,9 @@ class Solution:
             return 0
         if len(nums) == 1: 
             return nums[0] 
- 
+        if len(nums) == 2: 
+            return max(nums[0],nums[1])
+        
         def robber_helper(nums,i,j):
             if i==j:
                 return nums[i]
@@ -24,9 +26,9 @@ class Solution:
             
             for x in range(i+2, j): 
                 cache[x] = max(nums[x]+cache[x-2], cache[x-1])
-            return cache[-1]
+            return cache[j-1]
         
-        max1=robber_helper(nums,0,len(nums)-2)
-        max2=robber_helper(nums,1,len(nums)-1)
+        max1=robber_helper(nums,0,len(nums)-1)
+        max2=robber_helper(nums,1,len(nums))
          
         return max(max1,max2)
