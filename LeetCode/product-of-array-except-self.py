@@ -9,3 +9,18 @@ Constraint: It's guaranteed that the product of the elements of any prefix or su
 
 Note: Please solve it without division and in O(n).
 """
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        l=[1]*len(nums)
+        r=[1]*len(nums)
+        prod=1
+        opp_prod=1
+        opp_x=len(nums)-1
+        for x in range(len(nums)):
+            if x!=0:
+                prod*=nums[x-1]
+                opp_prod*=nums[opp_x-x+1]
+            l[x]=prod
+            r[opp_x-x]=opp_prod
+
+        return [x*y for x,y in zip(l,r)]
