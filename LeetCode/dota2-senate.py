@@ -31,4 +31,36 @@ And in the round 2, the third senator can just announce the victory since he is 
 Note:
 The length of the given string will in the range [1, 10,000].
 '''
-
+import queue
+class Solution:
+    def predictPartyVictory(self, senate: str) -> str:
+        q=queue.Queue(maxsize=10000)
+        #scoreBoard has number of R senators, number of D senators, pending R bans, pending D bans
+        scoreBoard=[0]*4
+        for x in senate:
+            if x=="R":
+                scoreBoard[0]+=1
+            else:
+                scoreBoard[1]+=1
+            q.put(x)
+        
+        while q.empty()!=True:
+            curr=q.get()
+            if curr=="R":
+                if scoreBoard[2]==0:
+                    scoreBoard[3]+=1
+                    q.put(curr)
+                else:
+                    scoreBoard[2]-=1
+                    scoreBoard[0]-=1
+            else:
+                if scoreBoard[3]==0:
+                    scoreBoard[2]+=1
+                    q.put(curr)
+                else:
+                    scoreBoard[2]-=1
+                    scoreBoard[1]-=1
+            if scoreBoard[0]==0:
+                return "Dire"
+            elif scoreBoard[1]==0:
+                return "Radiant"
