@@ -16,4 +16,29 @@ Input: "226"
 Output: 3
 Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
 '''
-
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        count=1
+        used=1
+        
+        list(s)
+        if s[0]=='0':
+            count=0
+            used=0
+        
+        for x in range(len(s)):
+            if x>0:
+                if int(s[x-1]+s[x])>26:
+                    if used==1:
+                        used=0
+                    else:
+                        count+=1
+                else:
+                    print("NO",x)
+                    if used==0:
+                        used=1
+                        count+=1
+                    else:
+                        used=1
+                        count+=1
+        return count
