@@ -32,6 +32,7 @@ Note:
 The length of the given string will in the range [1, 10,000].
 '''
 import queue
+import queue
 class Solution:
     def predictPartyVictory(self, senate: str) -> str:
         q=queue.Queue(maxsize=10000)
@@ -58,8 +59,9 @@ class Solution:
                     scoreBoard[2]+=1
                     q.put(curr)
                 else:
-                    scoreBoard[2]-=1
+                    scoreBoard[3]-=1
                     scoreBoard[1]-=1
+            print(scoreBoard)
             if scoreBoard[0]==0:
                 return "Dire"
             elif scoreBoard[1]==0:
