@@ -71,27 +71,27 @@ class Solution:
             ans[x][len(matrix[0])-1]=(ans[x][len(matrix[0])-1][0],1)
             q.put((x,len(matrix[0])-1))
  
-#         while q.empty()==False:
-#             curr=q.get()
-#             if curr[0]+1>len(matrix)-1:
-#                 ans[curr[0]][curr[1]]=(1,1)
-#             elif ans[curr[0]+1][curr[1]][0]<1:
-#                 if matrix[curr[0]+1][curr[1]]>=matrix[curr[0]][curr[1]]:
-#                     q.put((curr[0]+1,curr[1]))
-#                     ans[curr[0]+1][curr[1]]=(1,0)
-#                 else:
-#                     if ans[curr[0]+1][curr[1]][0]!=1:
-#                         ans[curr[0]+1][curr[1]]=(-1,0)
+        while q.empty()==False:
+            curr=q.get()
+            if curr[0]-1<0:
+                ans[curr[0]][curr[1]]=(1,1)
+            elif ans[curr[0]-1][curr[1]][1]<1:
+                if matrix[curr[0]-1][curr[1]]>=matrix[curr[0]][curr[1]]:
+                    q.put((curr[0]-1,curr[1]))
+                    ans[curr[0]-1][curr[1]]=(ans[curr[0]-1][curr[1]][0],1)
+                else:
+                    if ans[curr[0]-1][curr[1]][1]!=1:
+                        ans[curr[0]-1][curr[1]]=(ans[curr[0]-1][curr[1]][0],-1)
                         
-#             if curr[1]+1>len(matrix[0])-1:
-#                 ans[curr[0]][curr[1]]=(1,1)        
-#             elif ans[curr[0]][curr[1]+1][0]<1:
-#                 if matrix[curr[0]][curr[1]+1]>=matrix[curr[0]][curr[1]]:
-#                     q.put((curr[0],curr[1]+1))
-#                     ans[curr[0]][curr[1]+1]=(1,0)
-#                 else:
-#                     if ans[curr[0]][curr[1]+1][0]!=1:
-#                         ans[curr[0]][curr[1]+1]=(-1,0)        
+            if curr[1]-1<0:
+                ans[curr[0]][curr[1]]=(1,1)  
+            elif ans[curr[0]][curr[1]-1][1]<1:
+                if matrix[curr[0]][curr[1]-1]>=matrix[curr[0]][curr[1]]:
+                    q.put((curr[0],curr[1]-1))
+                    ans[curr[0]][curr[1]-1]=(ans[curr[0]][curr[1]-1][0],1)
+                else:
+                    if ans[curr[0]][curr[1]-1][1]!=1:
+                        ans[curr[0]][curr[1]-1]=(ans[curr[0]][curr[1]-1][0],-1)    
         
         #Find answer
         
