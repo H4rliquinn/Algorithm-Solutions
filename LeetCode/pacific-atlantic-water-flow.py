@@ -19,3 +19,54 @@ Given the following 5x5 matrix:
 Return:
 [[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]] (positions with parentheses in above matrix).
 '''
+import queue
+class Solution:
+    def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:
+        
+       
+        ans=[]
+        for x in range(len(matrix)):
+            ans.append([])
+            for y in matrix[0]:
+                ans[x].append((0,0))
+        q=queue.Queue(maxsize=0)
+        rtn=[]
+        
+        #Set Pacific possible
+        for x in range(len(matrix[0])):
+            ans[0][x]=(1,0)
+            q.put((0,x))
+        for x in range(1,len(matrix)):
+            ans[x][0]=(1,0)
+            q.put((x,0)) 
+        while q.empty()==False:
+
+            curr=q.get()
+            if curr[0]+1>len(matrix)-1:
+                ans[curr[0]][curr[1]]=(1,1)
+            elif ans[curr[0]+1][curr[1]][0]<1:
+                if matrix[curr[0]+1][curr[1]]>=matrix[curr[0]][curr[1]]:
+                    q.put((curr[0]+1,curr[1]))
+                    ans[curr[0]+1][curr[1]]=(1,0)
+                else:
+                    if ans[curr[0]+1][curr[1]][0]!=1:
+                        ans[curr[0]+1][curr[1]]=(-1,0)
+                        
+            if curr[1]+1>len(matrix[0])-1:
+                ans[curr[0]][curr[1]]=(1,1)        
+            elif ans[curr[0]][curr[1]+1][0]<1:
+                if matrix[curr[0]][curr[1]+1]>=matrix[curr[0]][curr[1]]:
+                    q.put((curr[0],curr[1]+1))
+                    ans[curr[0]][curr[1]+1]=(1,0)
+                else:
+                    if ans[curr[0]][curr[1]+1][0]!=1:
+                        ans[curr[0]][curr[1]+1]=(-1,0)        
+        #Set Atlantic possible
+        
+        #Find answer
+        
+        
+        print("ANSWER")
+        for x in ans:
+            print(x)
+        # print("QUEUE",list(q.queue))
