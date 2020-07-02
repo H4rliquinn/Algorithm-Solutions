@@ -22,21 +22,16 @@ Note:
 You may assume the length of given time series array won't exceed 10000.
 You may assume the numbers in the Teemo's attacking time series and his poisoning time duration per attacking are non-negative integers, which won't exceed 10,000,000.
 '''
-# import queue
 class Solution:
     def findPoisonedDuration(self, timeSeries: List[int], duration: int) -> int:
-        # curr=0
         poison_start=0
         poison_end=0
         time=0
-        # q=queue.Queue(maxspace=10000)
         
         if len(timeSeries)<1 or duration<1:
             return 0
         
-        for x in timeSeries:
-            
-            #Set up the current range add time
+        for x in timeSeries:           
             if poison_start==0:
                 poison_start=x
                 poison_end=x+duration
@@ -46,8 +41,6 @@ class Solution:
                 poison_end=x+duration
                 time+=duration
             elif x>poison_start:
-                print("Within",x+duration,poison_end)
                 time+=(x+duration)-(poison_end)
                 poison_end=x+duration
-            print(time)
         return time
